@@ -16,31 +16,28 @@ pub struct Spring {
 impl Spring {
     pub fn update(&mut self, time: f32, dt: f32){
         // in a 2d graph y = position, x = time
-        self.velocity += RK4::solver(self.position, time, dt, Self::calculate_spring_force);
-        self.velocity += RK4::solver(self.velocity, time, dt, Self::calculate_dampen_force);
-        self.position += RK4::solver(self.velocity, time, dt, Self::calculate_position);
+        self.velocity = RK4::solver(self.position, time, dt, Self::calculate_spring_force);
+        // self.velocity = RK4::solver(self.velocity, time, dt, Self::calculate_dampen_force);
+        self.position = RK4::solver(self.velocity, time, dt, Self::calculate_position);
     }
     // according to the position it will calculate the force applied to the spring mass
     pub fn calculate_spring_force(x: f32, time: f32) -> f32{
         // if the origin of the spring is in the origin we can just use x itself
+
         let force = -1.0 * x;
 
         force
     }
-    // according to the velociy it will calculate the dampening force applied to the spring mass
-    pub fn calculate_dampen_force(x: f32, time: f32) -> f32{
+    // according to the velocity it will calculate the dampening force applied to the spring mass
+    pub fn calculate_dampen_force(x: f32, _time: f32) -> f32{
         // if the origin of the spring is in the origin we can just use x itself
         let force = -0.5 * x;
 
         force
     }
 
-    pub fn calculate_position(x: f32, time: f32) -> f32 {
+    pub fn calculate_position(x: f32, _time: f32) -> f32 {
         x
-    }
-
-    pub fn f1(x: f32, time: f32){
-        
     }
 }
 

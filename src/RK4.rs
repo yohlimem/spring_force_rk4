@@ -11,6 +11,6 @@ impl RK4 {
         let k2 = f(current_time + dt/2.0, x + (dt/2.0)*k1);
         let k3 = f(current_time + dt/2.0, x + (dt/2.0)*k2);
         let k4 = f(current_time + dt, x + (dt*k3));
-        dt*(k1 + 2.0*k2 + 2.0*k3 + k4)/6.0
+        x + (dt/6.0)*(k1 + 2.0*k2 + 2.0*k3 + k4)
     }
 }
